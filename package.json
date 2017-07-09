@@ -1,0 +1,29 @@
+{
+  "name": "basedakp48-plugin-bitcoin-address-checker",
+  "version": "0.0.1",
+  "description": "Checks a bitcoin address for Bitcoin, or generates an address from a string and checks it.",
+  "license": "MIT",
+  "repository": "BasedAKP48/bitcoin-address-checker",
+  "author": {
+    "name": "Austin Peterson",
+    "email": "austin@akpwebdesign.com",
+    "url": "blog.akpwebdesign.com"
+  },
+  "engines": {
+    "node": ">=6"
+  },
+  "scripts": {
+    "start": "node index.js"
+  },
+  "files": [
+    "index.js"
+  ],
+  "keywords": [
+    "basedakp48-plugin"
+  ],
+  "dependencies": {
+    "bitcoin-address-checker": "^2.0.1",
+    "firebase-admin": "^5.0.0"
+  },
+  "devDependencies": {}
+}
