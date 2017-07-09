@@ -69,15 +69,15 @@ bip66@^1.1.0:
   dependencies:
     safe-buffer "^5.0.1"
 
-bitcoin-address-checker@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/bitcoin-address-checker/-/bitcoin-address-checker-2.0.1.tgz#41daa855859f3e141db8d91b57a8b6b4eb550b52"
+bitcoin-address-checker@^3.0.2:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/bitcoin-address-checker/-/bitcoin-address-checker-3.0.2.tgz#aab83fe8f4611415b7185d1615df1e484e29c2a7"
   dependencies:
     bigi "^1.4.2"
     bitcoinjs-lib "^3.1.0"
     bluebird "^3.5.0"
-    get-json "^0.0.3"
     minimist "^1.2.0"
+    request "^2.81.0"
 
 bitcoin-ops@^1.3.0:
   version "1.3.0"
@@ -182,12 +182,6 @@ dashdash@^1.12.0:
   dependencies:
     assert-plus "^1.0.0"
 
-debug@*:
-  version "2.6.8"
-  resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.8.tgz#e731531ca2ede27d188222427da17821d68ff4fc"
-  dependencies:
-    ms "2.0.0"
-
 delayed-stream@~1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/delayed-stream/-/delayed-stream-1.0.0.tgz#df3ae199acadfb7d440aaae0b29e2272b24ec619"
@@ -246,14 +240,6 @@ form-data@~2.1.1:
     combined-stream "^1.0.5"
     mime-types "^2.1.12"
 
-get-json@^0.0.3:
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/get-json/-/get-json-0.0.3.tgz#6b0de5271a55807c6b3bd1b13dfb66e05a9e12aa"
-  dependencies:
-    is-node "0.0.0"
-    jsonp "0.0.4"
-    request "*"
-
 getpass@^0.1.1:
   version "0.1.7"
   resolved "https://registry.yarnpkg.com/getpass/-/getpass-0.1.7.tgz#5eff8e3e684d569ae4cb2b1282604e8ba62149fa"
@@ -302,10 +288,6 @@ inherits@^2.0.1:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/inherits/-/inherits-2.0.3.tgz#633c2c83e3da42a502f52466022480f4208261de"
 
-is-node@0.0.0:
-  version "0.0.0"
-  resolved "https://registry.yarnpkg.com/is-node/-/is-node-0.0.0.tgz#87dd650b87fb6a39c50caafee0e9f6835ec15e41"
-
 is-typedarray@~1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/is-typedarray/-/is-typedarray-1.0.0.tgz#e479c80858df0c1b11ddda6940f96011fcda4a9a"
@@ -348,12 +330,6 @@ json-stringify-safe@~5.0.1:
 jsonify@~0.0.0:
   version "0.0.0"
   resolved "https://registry.yarnpkg.com/jsonify/-/jsonify-0.0.0.tgz#2c74b6ee41d93ca51b7b5aaee8f503631d252a73"
-
-jsonp@0.0.4:
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/jsonp/-/jsonp-0.0.4.tgz#94665a4b771aabecb8aac84135b99594756918bd"
-  dependencies:
-    debug "*"
 
 jsonwebtoken@7.1.9:
   version "7.1.9"
@@ -417,10 +393,6 @@ moment@2.x.x:
   version "2.18.1"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.18.1.tgz#c36193dd3ce1c2eed2adb7c802dbbc77a81b1c0f"
 
-ms@2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/ms/-/ms-2.0.0.tgz#5608aeadfc00be6c2901df5f9861788de0d597c8"
-
 ms@^0.7.1:
   version "0.7.3"
   resolved "https://registry.yarnpkg.com/ms/-/ms-0.7.3.tgz#708155a5e44e33f5fd0fc53e81d0d40a91be1fff"
@@ -457,7 +429,7 @@ randombytes@^2.0.1:
   dependencies:
     safe-buffer "^5.1.0"
 
-request@*:
+request@^2.81.0:
   version "2.81.0"
   resolved "https://registry.yarnpkg.com/request/-/request-2.81.0.tgz#c6928946a0e06c5f8d6f8a9333469ffda46298a0"
   dependencies:

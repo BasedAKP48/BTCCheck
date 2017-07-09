@@ -26,7 +26,9 @@ rootRef.child('messages').orderByChild('timeReceived').startAt(Date.now()).on('c
     btccheck(text.join(' ')).then((info) => {
       let resp = `Address: ${info.address}, Current BTC: ${fromSAT(info.final_balance)}, Total BTC Seen: ${fromSAT(info.total_received)}, Total Transactions: ${info.n_tx}, WIF: ${info.wif}.`;
       sendMessage(msg, resp);
-    })
+    }, (error) => {
+      sendMessage(msg, `Error: ${error.error}`);
+    });
 	}
 
 });

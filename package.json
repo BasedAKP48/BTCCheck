@@ -22,7 +22,7 @@
     "basedakp48-plugin"
   ],
   "dependencies": {
-    "bitcoin-address-checker": "^2.0.1",
+    "bitcoin-address-checker": "^3.0.2",
     "firebase-admin": "^5.0.0"
   },
   "devDependencies": {}
