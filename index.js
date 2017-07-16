@@ -27,7 +27,45 @@ rootRef.child('messages').orderByChild('timeReceived').startAt(Date.now()).on('c
     let args = parseArgs(text);
     btccheck(args._.join(' '), args.compressed).then((info) => {
       let resp = `Address: ${info.address}, Current BTC: ${fromSAT(info.final_balance)}, Total BTC Seen: ${fromSAT(info.total_received)}, Total Transactions: ${info.n_tx}, WIF: ${info.wif}.`;
-      sendMessage(msg, resp);
+      sendMessage(msg, resp, {
+        discord_embed: {
+          title: "Bitcoin Address Information",
+          url: `https://blockchain.info/address/${info.address}`,
+          timestamp: Date.now(),
+          color: 0x119900,
+          footer: {
+            text: "Data via blockchain.info",
+            icon_url: "https://akp48.akpmakes.tech/img/blockchain.info.png"
+          },
+          fields: [
+            {
+              name: "Address",
+              value: info.address,
+              inline: false
+            },
+            {
+              name: "Private Key (WIF)",
+              value: info.wif,
+              inline: false
+            },
+            {
+              name: "Current BTC",
+              value: fromSAT(info.final_balance),
+              inline: false
+            },
+            {
+              name: "Total BTC Seen",
+              value: fromSAT(info.total_received),
+              inline: false
+            },
+            {
+              name: "Total Transactions",
+              value: info.n_tx,
+              inline: false
+            }
+          ]
+        }
+      });
     }, (error) => {
       sendMessage(msg, `Error: ${error.error}`);
     });
@@ -35,14 +73,15 @@ rootRef.child('messages').orderByChild('timeReceived').startAt(Date.now()).on('c
 
 });
 
-function sendMessage(msg, text) {
+function sendMessage(msg, text, extra) {
   let response = {
     uid: 'bitcoin-address-checker',
     cid: 'bitcoin-address-checker',
     text: text,
     channel: msg.channel,
     msgType: 'chatMessage',
-    timeReceived: Date.now()
+    timeReceived: Date.now(),
+    extra_client_info: extra
   }
 
   let responseRef = rootRef.child('messages').push();
