@@ -31,7 +31,6 @@ rootRef.child('messages').orderByChild('timeReceived').startAt(Date.now()).on('c
         discord_embed: {
           title: "Bitcoin Address Information",
           url: `https://blockchain.info/address/${info.address}`,
-          timestamp: Date.now(),
           color: 0x119900,
           footer: {
             text: "Data via blockchain.info",
