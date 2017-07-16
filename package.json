@@ -23,7 +23,8 @@
   ],
   "dependencies": {
     "bitcoin-address-checker": "^3.0.2",
-    "firebase-admin": "^5.0.0"
+    "firebase-admin": "^5.0.0",
+    "minimist": "^1.2.0"
   },
   "devDependencies": {}
 }

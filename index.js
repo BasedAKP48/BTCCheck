@@ -1,5 +1,6 @@
 // firebase-admin is what allows us to connect to the Firebase database.
 const admin = require('firebase-admin');
+const parseArgs = require('minimist');
 
 /**
  * A serviceAccount.json file is required to connect.
@@ -23,7 +24,8 @@ rootRef.child('messages').orderByChild('timeReceived').startAt(Date.now()).on('c
 
 	if(text[0].toLowerCase() == '.btccheck') {
     text.shift();
-    btccheck(text.join(' ')).then((info) => {
+    let args = parseArgs(text);
+    btccheck(args._.join(' '), args.compressed).then((info) => {
       let resp = `Address: ${info.address}, Current BTC: ${fromSAT(info.final_balance)}, Total BTC Seen: ${fromSAT(info.total_received)}, Total Transactions: ${info.n_tx}, WIF: ${info.wif}.`;
       sendMessage(msg, resp);
     }, (error) => {
