@@ -66,7 +66,23 @@ rootRef.child('messages').orderByChild('timeReceived').startAt(Date.now()).on('c
         }
       });
     }, (error) => {
-      sendMessage(msg, `Error: ${error.error}`);
+      sendMessage(msg, `Error: ${error.error}`, {
+        discord_embed: {
+          title: "Bitcoin Address Information",
+          color: 0xBA3232,
+          footer: {
+            text: "Data via blockchain.info",
+            icon_url: "https://akp48.akpmakes.tech/img/blockchain.info.png"
+          },
+          fields: [
+            {
+              name: "Error",
+              value: error.error,
+              inline: false
+            }
+          ]
+        }
+      });
     });
 	}
 
