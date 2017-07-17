@@ -1,6 +1,7 @@
 // firebase-admin is what allows us to connect to the Firebase database.
 const admin = require('firebase-admin');
 const parseArgs = require('minimist');
+const request = require('request-promise');
 
 /**
  * A serviceAccount.json file is required to connect.
@@ -23,9 +24,36 @@ rootRef.child('messages').orderByChild('timeReceived').startAt(Date.now()).on('c
   let text = msg.text.split(' ');
 
 	if(text[0].toLowerCase() == '.btccheck') {
-    text.shift();
-    let args = parseArgs(text);
-    btccheck(args._.join(' '), args.compressed).then((info) => {
+    return new Promise((resolve, reject) => {
+      text.shift();
+      let args = parseArgs(text);
+      if(args.url) {
+        return resolve(request({
+          method: 'HEAD',
+          uri: args.url,
+        }).then((response) => {
+          if(!response['content-length']) {
+            throw {error: "This server does not provide a 'content-length' header. For safety, this request will not be honored. Sorry for the inconvenience."};
+          }
+          if(Number(response['content-length']) > 5*(1024*1024)) { // 5MB
+            throw {error: "This file is too large for me to download. The size limit is 5MB. Sorry for the inconvenience."};
+          }
+          return request({
+            method: 'GET',
+            uri: args.url
+          });
+        }, (error) => {
+          if(error.code === 'ETIMEDOUT') {
+            throw {error: "We're sorry, your call could not be completed as dialed. Please check the number and try again."};
+          }
+          throw {error: "An error occurred. Make sure you gave me a real URL."};
+        }).then((response) => {
+          return btccheck(response, args.compressed);
+        }));
+      } else {
+        return resolve(btccheck(args._.join(' '), args.compressed));
+      }
+    }).then((info) => {
       let resp = `Address: ${info.address}, Current BTC: ${fromSAT(info.final_balance)}, Total BTC Seen: ${fromSAT(info.total_received)}, Total Transactions: ${info.n_tx}, WIF: ${info.wif}.`;
       sendMessage(msg, resp, {
         discord_embed: {
@@ -84,8 +112,7 @@ rootRef.child('messages').orderByChild('timeReceived').startAt(Date.now()).on('c
         }
       });
     });
-	}
-
+  }
 });
 
 function sendMessage(msg, text, extra) {
