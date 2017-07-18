@@ -118,7 +118,7 @@ rootRef.child('messages').orderByChild('timeReceived').startAt(Date.now()).on('c
 function sendMessage(msg, text, extra) {
   let response = {
     uid: 'bitcoin-address-checker',
-    cid: 'bitcoin-address-checker',
+    cid: msg.cid,
     text: text,
     channel: msg.channel,
     msgType: 'chatMessage',
@@ -126,14 +126,7 @@ function sendMessage(msg, text, extra) {
     extra_client_info: extra
   }
 
-  let responseRef = rootRef.child('messages').push();
-  let responseKey = responseRef.key;
-
-  let updateData = {};
-  updateData[`messages/${responseKey}`] = response;
-  updateData[`clients/${msg.cid}/${responseKey}`] = response;
-
-  return rootRef.update(updateData);
+  return rootRef.child('outgoingMessages').push().set(response);
 }
 
 function fromSAT(val) {
